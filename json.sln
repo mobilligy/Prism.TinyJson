@@ -2,9 +2,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "json", "src\json.csproj", "{63C018A7-2E1D-441E-A722-26E59D0D336D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "json", "src\json.csproj", "{63C018A7-2E1D-441E-A722-26E59D0D336D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jsontest", "test\jsontest.csproj", "{CFA5CDCC-8818-4A06-B180-39D6E133C28B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jsontest", "test\jsontest.csproj", "{CFA5CDCC-8818-4A06-B180-39D6E133C28B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "json.iOS", "json.iOS\json.iOS.csproj", "{F1699074-6F18-40EE-9994-F24DF3DE53E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "json.Android", "json.Android\json.Android.csproj", "{B571E8CE-249E-4AA2-AC21-5018B9B43759}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +44,30 @@ Global
 		{CFA5CDCC-8818-4A06-B180-39D6E133C28B}.Release|x64.Build.0 = Release|Any CPU
 		{CFA5CDCC-8818-4A06-B180-39D6E133C28B}.Release|x86.ActiveCfg = Release|Any CPU
 		{CFA5CDCC-8818-4A06-B180-39D6E133C28B}.Release|x86.Build.0 = Release|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Debug|x64.Build.0 = Debug|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Release|x64.ActiveCfg = Release|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Release|x64.Build.0 = Release|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1699074-6F18-40EE-9994-F24DF3DE53E4}.Release|x86.Build.0 = Release|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Debug|x64.Build.0 = Debug|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Debug|x86.Build.0 = Debug|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Release|x64.ActiveCfg = Release|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Release|x64.Build.0 = Release|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Release|x86.ActiveCfg = Release|Any CPU
+		{B571E8CE-249E-4AA2-AC21-5018B9B43759}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

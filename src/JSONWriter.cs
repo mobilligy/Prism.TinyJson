@@ -29,11 +29,17 @@ namespace TinyJson
             }
 
             Type type = item.GetType();
+
+            if (type.IsEnum)
+            {
+                type = type.GetEnumUnderlyingType();
+            }
+
             if (type == typeof(string))
             {
                 stringBuilder.Append('"');
                 string str = (string)item;
-                for (int i = 0; i<str.Length; ++i)
+                for (int i = 0; i < str.Length; ++i)
                     if (str[i] < ' ' || str[i] == '"' || str[i] == '\\')
                     {
                         stringBuilder.Append('\\');
@@ -47,9 +53,16 @@ namespace TinyJson
                         stringBuilder.Append(str[i]);
                 stringBuilder.Append('"');
             }
-            else if (type == typeof(byte) || type == typeof(int))
+            else if (type.IsPrimitive && JSONUtilities.NumericTypes.Contains(type))
             {
-                stringBuilder.Append(item.ToString());
+                if (type == typeof(int))
+                {
+                    stringBuilder.Append(((int)item).ToString());
+                }
+                else
+                {
+                    stringBuilder.Append(item.ToString());
+                }
             }
             else if (type == typeof(float))
             {
@@ -59,14 +72,24 @@ namespace TinyJson
             {
                 stringBuilder.Append(((double)item).ToString(System.Globalization.CultureInfo.InvariantCulture));
             }
+            else if (type == typeof(decimal))
+            {
+                stringBuilder.Append(((decimal)item).ToString(System.Globalization.CultureInfo.InvariantCulture));
+            }
             else if (type == typeof(bool))
             {
                 stringBuilder.Append(((bool)item) ? "true" : "false");
             }
-            else if (type.IsEnum)
+            else if (type == typeof(Byte[]))
             {
                 stringBuilder.Append('"');
-                stringBuilder.Append(item.ToString());
+                stringBuilder.Append(Convert.ToBase64String((byte[])item));
+                stringBuilder.Append('"');
+            }
+            else if (type == typeof(DateTime))
+            {
+                stringBuilder.Append('"');
+                stringBuilder.Append(((DateTime)item).ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFFK"));
                 stringBuilder.Append('"');
             }
             else if (item is IList)
@@ -119,7 +142,7 @@ namespace TinyJson
                 FieldInfo[] fieldInfos = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
                 for (int i = 0; i < fieldInfos.Length; i++)
                 {
-                    if (fieldInfos[i].IsDefined(typeof(IgnoreDataMemberAttribute), true))
+                    if (fieldInfos[i].IsDefined(typeof(JsonIgnoreAttribute), true))
                         continue;
 
                     object value = fieldInfos[i].GetValue(item);
@@ -136,9 +159,9 @@ namespace TinyJson
                     }
                 }
                 PropertyInfo[] propertyInfo = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
-                for (int i = 0; i<propertyInfo.Length; i++)
+                for (int i = 0; i < propertyInfo.Length; i++)
                 {
-                    if (!propertyInfo[i].CanRead || propertyInfo[i].IsDefined(typeof(IgnoreDataMemberAttribute), true))
+                    if (!propertyInfo[i].CanRead || propertyInfo[i].IsDefined(typeof(JsonIgnoreAttribute), true))
                         continue;
 
                     object value = propertyInfo[i].GetValue(item, null);
@@ -161,11 +184,11 @@ namespace TinyJson
 
         static string GetMemberName(MemberInfo member)
         {
-            if (member.IsDefined(typeof(DataMemberAttribute), true))
+            if (member.IsDefined(typeof(JsonPropertyAttribute), true))
             {
-                DataMemberAttribute dataMemberAttribute = (DataMemberAttribute)Attribute.GetCustomAttribute(member, typeof(DataMemberAttribute), true);
-                if (!string.IsNullOrEmpty(dataMemberAttribute.Name))
-                    return dataMemberAttribute.Name;
+                JsonPropertyAttribute dataMemberAttribute = (JsonPropertyAttribute)Attribute.GetCustomAttribute(member, typeof(JsonPropertyAttribute), true);
+                if (!string.IsNullOrEmpty(dataMemberAttribute.PropertyName))
+                    return dataMemberAttribute.PropertyName;
             }
 
             return member.Name;
