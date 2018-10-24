@@ -55,14 +55,8 @@ namespace TinyJson
             }
             else if (type.IsPrimitive && JSONUtilities.NumericTypes.Contains(type))
             {
-                if (type == typeof(int))
-                {
-                    stringBuilder.Append(((int)item).ToString());
-                }
-                else
-                {
-                    stringBuilder.Append(item.ToString());
-                }
+                var value = Convert.ChangeType(item, type);
+                stringBuilder.Append(value.ToString());
             }
             else if (type == typeof(float))
             {
