@@ -440,7 +440,8 @@ namespace TinyJson
                 if (elems.Count % 2 != 0)
                     return new JsonToken(JsonTokenType.Null, null);
 
-                var dictionary = new Dictionary<string, JsonToken>(elems.Count / 2);
+                var token = new JsonToken(JsonTokenType.Object, null);
+
                 for (int i = 0; i < elems.Count; i += 2)
                 {
                     if (elems[i].Length <= 2)
@@ -448,10 +449,10 @@ namespace TinyJson
 
                     string keyValue = elems[i].Substring(1, elems[i].Length - 2);
 
-                    dictionary.Add(keyValue, ParseToken(valueType, elems[i + 1]));
+                    token.AddKey(keyValue, ParseToken(valueType, elems[i + 1]));
                 }
 
-                return new JsonToken(JsonTokenType.Object, dictionary);
+                return token;
             }
             if (type == typeof(object))
             {
