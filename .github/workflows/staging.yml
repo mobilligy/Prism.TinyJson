@@ -18,10 +18,10 @@ jobs:
       with:
         dotnet-version: 3.1.300
       env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
     - name: Fetch all history for all tags and branches so we can update versions
       run: |
-        git config remote.origin.url https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        git config remote.origin.url https://x-access-token:${{ secrets.NUGET_TOKEN }}@github.com/${{ github.repository }}
         git fetch --prune --unshallow
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0.9.6
@@ -39,13 +39,12 @@ jobs:
       run: |
          dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.major }}.${{ steps.gitversion.outputs.minor }}.${{ steps.gitversion.outputs.patch }}.$GITHUB_RUN_NUMBER
+      run: dotnet build src/json.csproj --configuration Release --no-restore /p:Version=${{ steps.gitversion.outputs.major }}.${{ steps.gitversion.outputs.minor }}.${{ steps.gitversion.outputs.patch }}.$GITHUB_RUN_NUMBER
     - name: Test
-      run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=../CoverageResults/ /p:MergeWith="../CoverageResults/coverage.json" /p:CoverletOutputFormat=\"opencover,json\" -m:1
+      run: dotnet test test/jsontest.csproj --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=../CoverageResults/ /p:MergeWith="../CoverageResults/coverage.json" /p:CoverletOutputFormat=\"opencover,json\" -m:1
     - name: Package
       run: |
-        dotnet pack TinyJson --configuration Release /p:Version=${{ steps.gitversion.outputs.major }}.${{ steps.gitversion.outputs.minor }}.${{ steps.gitversion.outputs.patch }}.$GITHUB_RUN_NUMBER --output ./packages
+        dotnet pack src/json.csproj --configuration Release /p:Version=${{ steps.gitversion.outputs.major }}.${{ steps.gitversion.outputs.minor }}.${{ steps.gitversion.outputs.patch }}.$GITHUB_RUN_NUMBER --output ./packages
     - name: Publish to Nuget
       run: |
-        dotnet nuget push ./packages/TinyJson*.nupkg --source "BillGOGitHub-Unique" --api-key ${{secrets.GITHUB_TOKEN}} --skip-duplicate --no-symbols true
-  
+        echo "" || dotnet nuget push ./packages/TinyJson*.nupkg --source "https://nuget.pkg.github.com/mobilligy/index.json" --api-key ${{secrets.NUGET_TOKEN}} --skip-duplicate --no-symbols true
