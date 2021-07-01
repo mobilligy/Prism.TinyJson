@@ -360,7 +360,14 @@ namespace TinyJson
 
                 try
                 {
-                    return new JsonToken(JsonTokenType.Integer, long.Parse(json));
+                    if (long.TryParse(json, out var value))
+                    {
+                        return new JsonToken(JsonTokenType.Integer, value);
+                    }
+                    else
+                    {
+                        return new JsonToken(JsonTokenType.Integer, Convert.ToInt64(Enum.Parse(type, json, false)));
+                    }
                 }
                 catch
                 {
