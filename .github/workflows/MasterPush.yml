@@ -44,4 +44,4 @@ jobs:
     - name: Publish to Nuget
       run: dotnet nuget push ./packages/TinyJson*.nupkg --no-symbols --skip-duplicate --source "https://nuget.pkg.github.com/mobilligy/json/index.json"
       env:
-        NUGET_AUTH_TOKEN: ${{ github.token }}
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
