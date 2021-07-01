@@ -3,7 +3,6 @@
     <IsPackable>true</IsPackable>
     <PackageId>TinyJson</PackageId>
     <Title>TinyJson</Title>
-    <PackageVersion>1.0.0</PackageVersion>
     <Authors>Alex Parker</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/zanders3/json/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/mobilligy/json</PackageProjectUrl>
