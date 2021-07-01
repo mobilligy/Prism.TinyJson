@@ -1,4 +1,4 @@
-name: Staging Deployment
+name: Master Push
 
 on:
   push:
