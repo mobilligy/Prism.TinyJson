@@ -325,7 +325,7 @@ namespace TinyJson.Test
         class IgnoreDataMemberObject
         {
             public int A;
-            [IgnoreDataMember]
+            [JsonIgnore]
             public int B;
 
             public int C { get; set; }

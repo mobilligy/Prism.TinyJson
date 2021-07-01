@@ -1,0 +1,25 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.300
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build src/json.csproj --configuration Release --no-restore 
+    - name: Test
+      run: dotnet test test/jsontest.csproj --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=../CoverageResults/ /p:MergeWith="../CoverageResults/coverage.json" /p:CoverletOutputFormat=\"opencover,json\" -m:1
+    - name: Package
+      run: dotnet pack src/json.csproj --configuration Release --output ./packages

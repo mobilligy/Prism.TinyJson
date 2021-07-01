@@ -36,12 +36,12 @@ namespace TinyJson.Test
             Assert.AreEqual("false", false.ToJson());
             Assert.AreEqual("[1,2,3]", new int[] { 1, 2, 3 }.ToJson());
             Assert.AreEqual("[1,2,3]", new List<int> { 1, 2, 3 }.ToJson());
-            Assert.AreEqual("\"Green\"", Color.Green.ToJson());
-            Assert.AreEqual("\"Green\"", ((Color)1).ToJson());
-            Assert.AreEqual("\"10\"", ((Color)10).ToJson());
-            Assert.AreEqual("\"Bold\"", Style.Bold.ToJson());
-            Assert.AreEqual("\"Bold, Italic\"", (Style.Bold | Style.Italic).ToJson());
-            Assert.AreEqual("\"19\"", (Style.Bold | Style.Italic | (Style)16).ToJson());
+            Assert.AreEqual("1", Color.Green.ToJson());
+            Assert.AreEqual("1", ((Color)1).ToJson());
+            Assert.AreEqual("10", ((Color)10).ToJson());
+            Assert.AreEqual("1", Style.Bold.ToJson());
+            Assert.AreEqual("3", (Style.Bold | Style.Italic).ToJson());
+            Assert.AreEqual("19", (Style.Bold | Style.Italic | (Style)16).ToJson());
         }
 
         [TestMethod]
@@ -109,7 +109,7 @@ namespace TinyJson.Test
 
         class IgnoreDataMemberObject
         {
-            [IgnoreDataMember]
+            [JsonIgnore]
             public int A;
             public int B;
             [IgnoreDataMember]
@@ -125,7 +125,7 @@ namespace TinyJson.Test
 
         class DataMemberObject
         {
-            [DataMember(Name = "a")]
+            [JsonProperty(PropertyName = "a")]
             public int A;
             [DataMember()]
             public int B;
@@ -149,11 +149,11 @@ namespace TinyJson.Test
         [TestMethod]
         public void TestEnumMember()
         {
-            Assert.AreEqual("{\"Colors\":\"Green\",\"Style\":\"Bold\"}", new EnumClass { Colors = Color.Green, Style = Style.Bold }.ToJson());
-            Assert.AreEqual("{\"Colors\":\"Green\",\"Style\":\"Bold, Underline\"}", new EnumClass { Colors = Color.Green, Style = Style.Bold | Style.Underline }.ToJson());
-            Assert.AreEqual("{\"Colors\":\"Blue\",\"Style\":\"Italic, Underline\"}", new EnumClass { Colors = (Color)2, Style = (Style)6 }.ToJson());
-            Assert.AreEqual("{\"Colors\":\"Blue\",\"Style\":\"Underline\"}", new EnumClass { Colors = (Color)2, Style = (Style)4 }.ToJson());
-            Assert.AreEqual("{\"Colors\":\"10\",\"Style\":\"17\"}", new EnumClass { Colors = (Color)10, Style = (Style)17 }.ToJson());
+            Assert.AreEqual("{\"Colors\":1,\"Style\":1}", new EnumClass { Colors = Color.Green, Style = Style.Bold }.ToJson());
+            Assert.AreEqual("{\"Colors\":1,\"Style\":5}", new EnumClass { Colors = Color.Green, Style = Style.Bold | Style.Underline }.ToJson());
+            Assert.AreEqual("{\"Colors\":2,\"Style\":6}", new EnumClass { Colors = (Color)2, Style = (Style)6 }.ToJson());
+            Assert.AreEqual("{\"Colors\":2,\"Style\":4}", new EnumClass { Colors = (Color)2, Style = (Style)4 }.ToJson());
+            Assert.AreEqual("{\"Colors\":10,\"Style\":17}", new EnumClass { Colors = (Color)10, Style = (Style)17 }.ToJson());
         }
     }
 }
