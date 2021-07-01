@@ -579,7 +579,7 @@ namespace TinyJson
             for (int i = 0; i < members.Length; i++)
             {
                 T member = members[i];
-                if (member.IsDefined(typeof(JsonIgnoreAttribute), true))
+                if (member.IsDefined(typeof(JsonIgnoreAttribute), true) || member.IsDefined(typeof(IgnoreDataMemberAttribute), true))
                     continue;
 
                 string name = member.Name;
