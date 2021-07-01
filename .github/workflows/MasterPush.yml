@@ -41,5 +41,10 @@ jobs:
       run: dotnet test test/jsontest.csproj --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=../CoverageResults/ /p:MergeWith="../CoverageResults/coverage.json" /p:CoverletOutputFormat=\"opencover,json\" -m:1
     - name: Package
       run: dotnet pack src/json.csproj --configuration Release /p:Version=${{ steps.gitversion.outputs.major }}.${{ steps.gitversion.outputs.minor }}.${{ steps.gitversion.outputs.patch }}.$GITHUB_RUN_NUMBER --output ./packages
-    - name: Publish to Nuget
-      run: dotnet nuget push ./packages/TinyJson*.nupkg --source "https://nuget.pkg.github.com/mobilligy/index.json" --api-key ${{secrets.NUGET_TOKEN}} --skip-duplicate --no-symbols true
+   # - name: Publish to Nuget
+     # run: dotnet nuget push ./packages/TinyJson*.nupkg --source "https://nuget.pkg.github.com/mobilligy/index.json" --api-key ${{secrets.NUGET_TOKEN}} --skip-duplicate --no-symbols true
+    #  run: dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/OWNER/index.json"
+     - name: PPublish to Nuget
+      run: dotnet nuget push ./packages/TinyJson*.nupkg --no-symbols --skip-duplicate
+      env:
+        NUGET_AUTH_TOKEN: ${{ github.token }}
