@@ -11,5 +11,7 @@
     <PackageTags>Json;Serialisation</PackageTags>
     <RepositoryUrl>https://github.com/mobilligy/json</RepositoryUrl>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <AssemblyName>Prism.TinyJson</AssemblyName>
+    <RootNamespace>Prism.TinyJson</RootNamespace>
   </PropertyGroup>
 </Project>
