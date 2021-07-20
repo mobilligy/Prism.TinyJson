@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\json.csproj" />
+    <ProjectReference Include="..\src\Prism.TinyJson.csproj" />
   </ItemGroup>
 
 </Project>

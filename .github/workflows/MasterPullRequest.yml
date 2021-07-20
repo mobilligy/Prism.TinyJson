@@ -18,8 +18,8 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build src/json.csproj --configuration Release --no-restore 
+      run: dotnet build src/Prism.TinyJson.csproj --configuration Release --no-restore 
     - name: Test
       run: dotnet test test/jsontest.csproj --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=../CoverageResults/ /p:MergeWith="../CoverageResults/coverage.json" /p:CoverletOutputFormat=\"opencover,json\" -m:1
     - name: Package
-      run: dotnet pack src/json.csproj --configuration Release --output ./packages
+      run: dotnet pack src/Prism.TinyJson.csproj --configuration Release --output ./packages
