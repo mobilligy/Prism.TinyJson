@@ -10,6 +10,6 @@
     <Copyright></Copyright>
     <PackageTags>Json;Serialisation</PackageTags>
     <RepositoryUrl>https://github.com/mobilligy/Prism.TinyJson</RepositoryUrl>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 </Project>
