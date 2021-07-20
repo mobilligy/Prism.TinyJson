@@ -42,5 +42,5 @@ jobs:
     - name: Package
       run: dotnet pack src/Prism.TinyJson.csproj --configuration Release /p:Version=${{ steps.gitversion.outputs.major }}.${{ steps.gitversion.outputs.minor }}.${{ steps.gitversion.outputs.patch }}.${{ github.run_number }} --output ./packages
     - name: Publish to Nuget
-      run: dotnet nuget push ./packages/TinyJson*.nupkg --source "https://nuget.pkg.github.com/mobilligy/index.json" --api-key ${{secrets.NUGET_TOKEN}} --skip-duplicate --no-symbols true
+      run: dotnet nuget push ./packages/Prism.TinyJson*.nupkg --source "https://nuget.pkg.github.com/mobilligy/index.json" --api-key ${{secrets.NUGET_TOKEN}} --skip-duplicate --no-symbols true
       
